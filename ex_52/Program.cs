@@ -7,7 +7,13 @@ int[,] numbers = new int[4, 4];
 Fill2DArray(numbers);
 Print2DArray(numbers);
 Console.WriteLine("-----");
-PrintSumsArray(SumColumnElements(numbers));
+
+double[] sums = SumsColumnElements(numbers);
+// PrintSumsArray(sums);
+// Console.WriteLine();
+
+double[] averages = AveragesColumnElements(sums);
+PrintAveragesArray(averages);
 
 
 void Fill2DArray(int[,] numbers)
@@ -35,24 +41,43 @@ void Print2DArray(int[,] numbers)
 }
 
 
-int[] SumColumnElements(int[,] numbers)
+double[] SumsColumnElements(int[,] numbers)
 {
-    int[] sums = new int[numbers.GetLength(1)];
+    double[] sums = new double[numbers.GetLength(1)];
 
     for (int j = 0; j < numbers.GetLength(1); j++)
     {
         sums[j] = 0;
         for (int i = 0; i < numbers.GetLength(0); i++)
         {
-            sums[j] += numbers[i,j];
+            sums[j] += numbers[i, j];
         }
     }
     return sums;
 }
 
 
-void PrintSumsArray(int[] sums)
+// void PrintSumsArray(double[] sums)
+// {
+//     foreach (double item in sums)
+//         Console.Write($"{item, 3} ");
+// }
+
+
+double[] AveragesColumnElements(double[] sums)
 {
-    foreach (int sum in sums)
-        Console.Write($"{sum, 2} ");
+    double[] averages = new double[sums.Length];
+
+    for (int i = 0; i < sums.Length; i++)
+    {
+        averages[i] = sums[i] / sums.Length;
+    }
+    return averages;
+}
+
+
+void PrintAveragesArray(double[] averages)
+{
+    foreach (double item in averages)
+        Console.Write($"{item:f2} ");
 }
